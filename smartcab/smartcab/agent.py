@@ -3,6 +3,7 @@ import math
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
+import numpy as np
 
 class LearningAgent(Agent):
     """ An agent that learns to drive in the Smartcab world.
@@ -55,8 +56,8 @@ class LearningAgent(Agent):
         ########### 
         ## TO DO ##
         ###########
-        
-        # NOTE : you are not allowed to engineer eatures outside of the inputs available.
+         
+        # NOTE : you are not allowed to engineer features outside of the inputs available.
         # Because the aim of this project is to teach Reinforcement Learning, we have placed 
         # constraints in order for you to learn how to adjust epsilon and alpha, and thus learn about the balance between exploration and exploitation.
         # With the hand-engineered features, this learning process gets entirely negated.
@@ -106,11 +107,33 @@ class LearningAgent(Agent):
         ########### 
         ## TO DO ##
         ###########
+        if self.epsilon>1.0:
+            return ValueError('Epslion is larger than 1.0 it should be less or equal to 1.0')
         # When not learning, choose a random action
+        elif not self.learning:
+            action = self.randomly_select_action(self.valid_actions)
         # When learning, choose a random action with 'epsilon' probability
+        elif np.random.choice(2,p=[1-self.epsilon,self.epsilon]) > 0: # Will output a choice 0 with 1-epsilon chance or choice 1 with an epislon chance
+            action = self.randomly_select_action(self.valid_actions)
         # Otherwise, choose an action with the highest Q-value for the current state
+        else:
+            action = self.select_highestQ_action(self,maxQ_list)
         # Be sure that when choosing an action with highest Q-value that you randomly select between actions that "tie".
         return action
+
+    # returns an action randomly between the available actions
+    def randomly_select_action(self,available_actions):
+        randomIndex = np.random.randint(len(available_actions))
+        #print ("randomly selected :" ,available_actions[randomIndex])
+        return available_actions[randomIndex]
+
+    # returns the highest q-value and in case of a tie it'll randomly select between them
+    def select_highestQ_action(self,maxQ_list):
+        highestIndex = np.argmax(maxQ_list)
+        for actionIndex in maxQ_list:
+            if maxQ_list[actionIndex] == maxQ_list[highestIndex]:
+                considered_actions.insert(actionIndex)
+        return self.randomly_select_action(considered_actions)
 
 
     def learn(self, state, action, reward):
@@ -165,7 +188,7 @@ def run():
     # Follow the driving agent
     # Flags:
     #   enforce_deadline - set to True to enforce a deadline metric
-    env.set_primary_agent(agent)
+    env.set_primary_agent(agent,enforce_deadline=True)
 
     ##############
     # Create the simulation
@@ -174,14 +197,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env)
+    sim = Simulator(env,display=False,update_delay=0.01,log_metrics=True)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run()
+    sim.run(n_test=10)
 
 
 if __name__ == '__main__':
