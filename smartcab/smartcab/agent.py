@@ -42,13 +42,15 @@ class LearningAgent(Agent):
         # If 'testing' is True, set epsilon and alpha to 0
         if testing:
             self.epsilon,self.alpha = 0.0,0.0
-        else:
-            self.epsilon = 1.0/self.number_of_trials**2
+        else: # a = 0.99
+            self.epsilon = 0.99**self.number_of_trials
+            #self.epsilon -= 0.05
             self.number_of_trials+=1
             if self.epsilon < 0.0: # to avoid epslion = -0 or -3.1918911958e-16 
                 self.epsilon = 0.0
 
         return None
+
 
     def build_state(self):
         """ The build_state function is called when the agent requests data from the 
@@ -70,17 +72,16 @@ class LearningAgent(Agent):
         # With the hand-engineered features, this learning process gets entirely negated.
         
         # Set 'state' as a tuple of relevant data for the agent
-        is_red_light = inputs['light'] == 'red'
-        no_vehicle_to_the_right = inputs['right'] == 'None'     
-        no_vehicle_to_the_left = inputs['left'] == 'None'
-        next_waypoint = waypoint
-        oncoming_directions = inputs['oncoming'] 
-        state = (is_red_light,no_vehicle_to_the_left,no_vehicle_to_the_right,next_waypoint,oncoming_directions)
+        light = inputs['light'] 
+        right_vehicle = inputs['right']   
+        left_vehicle = inputs['left'] 
+        oncoming_vehicle  = inputs['oncoming'] 
+        state = (light,left_vehicle,right_vehicle,waypoint,oncoming_vehicle)
 
         return state
 
 
-    def get_maxQ(self, state):
+    def get_max_Q(self, state):
         """ The get_max_Q function is called when the agent is asked to find the
             maximum Q-value of all actions based on the 'state' the smartcab is in. """
         # Calculate the maximum Q-value of all actions for a given state
@@ -210,7 +211,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=25,tolerance=0.000005)
+    sim.run(n_test=50,tolerance=0.0005)
 
 
 if __name__ == '__main__':
