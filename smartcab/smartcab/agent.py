@@ -154,7 +154,7 @@ class LearningAgent(Agent):
             self.Q[state][action] = newQ
         #Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         #(1-alpha)*Q(s,a)+ alpha*(R+gamma*maxQ(s,a))
-        return newQ
+        return 
 
 
     def update(self):
@@ -211,7 +211,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=50,tolerance=0.0005)
+    sim.run(n_test=50,tolerance=0.005)
 
 
 if __name__ == '__main__':
