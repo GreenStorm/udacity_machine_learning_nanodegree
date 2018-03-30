@@ -1,40 +1,27 @@
-name: abdulkarim-capstone
+name: dog-project
 channels:
-  - conda-forge
   - defaults
 dependencies:
-  - ca-certificates=2018.1.18=0
-  - jpeg=9b=vc14_0
-  - lightgbm=2.1.0=py35_0
-  - openssl=1.0.2k=vc14_0
-  - zlib=1.2.8=vc14_3
   - _nb_ext_conf=0.3.0=py35_0
   - anaconda-client=1.6.2=py35_0
   - bleach=1.5.0=py35_0
-  - bokeh=0.12.14=py35_0
   - bzip2=1.0.6=vc14_3
-  - click=6.7=py35h10df73f_0
-  - cloudpickle=0.5.2=py35_1
   - clyent=1.2.2=py35_0
   - colorama=0.3.7=py35_0
   - cycler=0.10.0=py35_0
-  - dask=0.15.2=py35hea826ea_0
-  - dask-core=0.15.2=py35he1b8ae7_0
   - decorator=4.0.11=py35_0
-  - distributed=1.18.0=py35_0
   - entrypoints=0.2.2=py35_1
   - freetype=2.5.5=vc14_2
   - h5py=2.7.0=np112py35_0
   - hdf5=1.8.15.1=vc14_4
-  - heapdict=1.0.0=py35_2
   - html5lib=0.999=py35_0
   - icu=57.1=vc14_0
-  - imageio=2.2.0=py35hcd4b9a4_0
   - ipykernel=4.5.2=py35_0
   - ipython=5.3.0=py35_0
   - ipython_genutils=0.1.0=py35_0
   - ipywidgets=6.0.0=py35_0
   - jinja2=2.9.5=py35_0
+  - jpeg=9b=vc14_0
   - jsonschema=2.5.1=py35_0
   - jupyter=1.0.0=py35_3
   - jupyter_client=5.0.0=py35_0
@@ -42,59 +29,45 @@ dependencies:
   - jupyter_core=4.3.0=py35_0
   - libpng=1.6.27=vc14_0
   - libtiff=4.0.6=vc14_3
-  - locket=0.2.0=py35h0dfcdd0_1
   - markupsafe=0.23=py35_2
   - matplotlib=2.0.0=np112py35_0
   - mistune=0.7.4=py35_0
   - mkl=2017.0.1=0
-  - msgpack-python=0.5.5=py35he980bc4_0
   - nb_anacondacloud=1.2.0=py35_0
   - nb_conda=2.0.0=py35_0
   - nb_conda_kernels=2.0.0=py35_0
   - nbconvert=5.1.1=py35_0
   - nbformat=4.3.0=py35_0
   - nbpresent=3.0.2=py35_0
-  - networkx=2.0=py35h29b0c50_0
   - notebook=4.4.1=py35_0
   - numpy=1.12.1=py35_0
   - olefile=0.44=py35_0
-  - packaging=17.1=py35_0
-  - pandas=0.22.0=py35h6538335_0
+  - openssl=1.0.2k=vc14_0
   - pandocfilters=1.4.1=py35_0
-  - partd=0.3.8=py35h894d1e4_0
   - path.py=10.1=py35_0
-  - patsy=0.5.0=py35_0
   - pickleshare=0.7.4=py35_0
   - pillow=4.0.0=py35_1
   - pip=9.0.1=py35_1
   - prompt_toolkit=1.0.13=py35_0
-  - psutil=5.4.3=py35hfa6e2cd_0
   - pygments=2.2.0=py35_0
   - pyparsing=2.1.4=py35_0
   - pyqt=5.6.0=py35_2
   - python=3.5.3=0
   - python-dateutil=2.6.0=py35_0
   - pytz=2016.10=py35_0
-  - pywavelets=0.5.2=py35h7c47ace_0
   - pyyaml=3.12=py35_0
   - pyzmq=16.0.2=py35_0
   - qt=5.6.2=vc14_3
   - qtconsole=4.2.1=py35_2
   - requests=2.13.0=py35_0
-  - scikit-image=0.13.1=py35hfa6e2cd_1
   - scikit-learn=0.18.1=np112py35_1
   - scipy=0.19.0=np112py35_0
-  - seaborn=0.8.1=py35hc73483e_0
   - setuptools=27.2.0=py35_1
   - simplegeneric=0.8.1=py35_1
   - sip=4.18=py35_0
   - six=1.10.0=py35_0
-  - sortedcontainers=1.5.9=py35_0
-  - statsmodels=0.8.0=py35hfa6034c_0
-  - tblib=1.3.2=py35hd2cf7e1_0
   - testpath=0.3=py35_0
   - tk=8.5.18=vc14_0
-  - toolz=0.9.0=py35_0
   - tornado=4.4.2=py35_0
   - traitlets=4.3.2=py35_0
   - vc=14=h0510ff6_3
@@ -103,13 +76,21 @@ dependencies:
   - wheel=0.29.0=py35_0
   - widgetsnbextension=2.0.0=py35_0
   - win_unicode_console=0.5=py35_0
-  - zict=0.1.3=py35hf5542e0_0
+  - zlib=1.2.8=vc14_3
   - pip:
+    - absl-py==0.1.10
+    - astor==0.6.2
+    - gast==0.2.0
+    - grpcio==1.10.0
     - keras==2.0.2
+    - markdown==2.6.11
     - opencv-python==3.1.0.0
-    - protobuf==3.2.0
-    - tensorflow==1.0.1
+    - protobuf==3.5.1
+    - tensorboard==1.6.0
+    - tensorflow-gpu==1.6.0
+    - termcolor==1.1.0
     - theano==0.9.0
     - tqdm==4.11.2
-prefix: C:\Users\Abdulkarim\Anaconda2\envs\abdulkarim-capstone
+    - werkzeug==0.14.1
+prefix: D:\Kareem\Conda\envs\dog-project
 
